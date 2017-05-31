@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Psychic Game</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+</head>
+<body>
+
+<h1>Psychic Game!</h1>
+<h1>Guess What Letter Im Thinking of By Pressing a Key!</h1>
+
+<p id="guessesCorrect">Wins: 0</p>
+
+<p id="guessesLeft">Guesses Left: </p>
+
+<p id="currentLetter">Current Letter: </p>
+<!-- array of indicies -->
+<p id="wrongGuesses">Wrong Guesses: </p>
+<!-- += -->
+
+<script type="text/javascript">	
+// Global Vaiables
+
+	var guessesLeft = 20;
+	var guessesCorrect = 0;
+	var wrongGuesses = [];
+	var possibleGuesses = 'abcdefghijklmnopqrstuvqxyz'
+	var chosenLetter = [];
+	var userGuess;
+
+	while (chosenLetter.length < 1) {
+  		chosenLetter += possibleGuesses[Math.floor(Math.random() * possibleGuesses.length)];
+	} 
+	console.log(chosenLetter);
+
+		// When the user presses a key, it will run the following function...
+    $(document).keyup(function (e) {
+      	// Determine which key was pressed, make it lowercase, and set it to the userInput variable.
+    var userGuess = String.fromCharCode(e.keyCode).toLowerCase();
+    console.log(userGuess);
+
+// determines if the guess is correct or not. Adds it to respective array depending on outcome
+	if (userGuess === chosenLetter) {
+		console.log('the guess is correct');
+		// increase score if correct guess
+		guessesCorrect++;
+		$('#guessesCorrect').html('Wins: ' + guessesCorrect);
+		// End Game if they are correct
+		alert('You Win! Refresh the Page if You Wish to Play Again!!');
+	}
+	else {
+		console.log('the guess is incorrect');
+		// adds wrong guesses to empty set
+		wrongGuesses.push(userGuess);
+		// add wrong guess to variable and print it on screen
+		$('#wrongGuesses').html('Wrong Guesses: ' + wrongGuesses);
+		// decrease score if incorrect guess. End game when guessesLeft === 0
+		guessesLeft--;
+		$('#guessesLeft').html('Guesses Left: ' + guessesLeft);
+			if (guessesLeft === 0) {
+			alert('GAME OVER');
+			}
+	}
+
+	});
+
+
+	</script>
+
+
+
+</body>
+</html>
+
+</body>
+</html>
